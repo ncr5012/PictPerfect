@@ -2,162 +2,37 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>LoanTiger Example Pricing</title>
-<link rel="stylesheet" href="css/style.css"/>
-<style>
-  .example-section {
-    background: #f9f9f9;
-    border: 1px solid #eee;
-    padding: 20px;
-    margin-top: 40px;
-  }
-
-  .example-heading {
-    font-size: 1.5em;
-    margin-bottom: 20px;
-  }
-
-  .diagram-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 20px;
-  }
-
-  .diagram {
-    background: #fff;
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    flex: 1;
-    min-width: 250px;
-    padding: 20px;
-    box-sizing: border-box;
-  }
-
-  .diagram h3 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    text-align: center;
-  }
-
-  .diagram p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    line-height: 1.4em;
-  }
-
-  .highlight {
-    font-weight: bold;
-    color: #2a9d8f;
-  }
-
-  .savings-summary {
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .savings-summary strong {
-    color: #e76f51;
-  }
-
-  .cash-highlight {
-    background: #2a9d8f;
-    color: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 1.1em;
-  }
-
-  .fine-print {
-    font-size: 0.85em;
-    color: #555;
-    margin-top: 15px;
-    text-align: center;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing - PictPerfect</title>
+<link rel="stylesheet" href="css/styles.css">
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5FGPLWPLWY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5FGPLWPLWY');
-</script>
 <body>
-  <header>
-    <div class="container">
-      <h1><img src="images/icon.png" alt="Company Logo" style="height:150px; vertical-align:middle;"> AI Negotiation Services</h1>
-    </div>
-  </header>
-
-<nav>
-  <div class="container">
-    <ul>
+<header>
+  <nav class="navbar">
+    <div class="logo">PictPerfect</div>
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="pricing.html" class="active">Pricing</a></li>
-      <li><a href="about.html">About Us</a></li>
+      <li><a href="product.html">Product</a></li>
       <li><a href="blog.html">Blog</a></li>
+      <li><a href="how-pricing-works.html">Pricing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-  </div>
-</nav>
+  </nav>
+</header>
 
-<div class="container">
-  <h2>How Our Pricing Works</h2>
-  <p>It’s simple: if we don’t save you money on your mortgage’s origination fees or secure additional lender credits, you pay nothing. If we do save you money, our fee is 20% of whatever you save. We only charge you after you’ve closed on the loan and confirmed your final loan terms.</p>
+<section class="pricing-section">
+  <h1>Select Your Credit Package</h1>
+  <p>Each photo requires 1 credit. Credits cost $0.20 each. Bundles include discounts:</p>
+  <ul>
+    <li><input type="radio" name="credits" id="credits25" value="25" checked> 25 Credits = $5.00 (No discount)</li>
+    <li><input type="radio" name="credits" id="credits50" value="50"> 50 Credits = $9.50 (5% discount)</li>
+    <li><input type="radio" name="credits" id="credits100" value="100"> 100 Credits = $18.00 (10% discount)</li>
+  </ul>
+  <a class="btn-primary" href="payment.html">Proceed to Payment</a>
+</section>
 
-  <div class="example-section">
-    <h3 class="example-heading">Example Pricing Scenario:</h3>
-    <div class="diagram-container">
-      <!-- Original Loan Estimate -->
-      <div class="diagram">
-        <h3>Before Using LoanTiger</h3>
-        <p><strong>Interest Rate:</strong> 6%</p>
-        <p><strong>Points:</strong> 0</p>
-        <p><strong>Origination Fee:</strong> $1,000</p>
-        <p><strong>Lender Concessions:</strong> $0</p>
-      </div>
-
-      <!-- Negotiated Loan Estimate -->
-      <div class="diagram">
-        <h3>After Using LoanTiger</h3>
-        <p><strong>Interest Rate:</strong> 6%</p>
-        <p><strong>Points:</strong> 0</p>
-        <p><strong>Origination Fee:</strong> $0</p>
-        <p><strong>Lender Concessions:</strong> $4,000</p>
-      </div>
-    </div>
-
-    <div class="savings-summary">
-      <p>You would have paid your lender a $1,000 origination fee before using LoanTiger, but with LoanTiger, your lender will be paying YOU $4,000.</p>
-      <p><strong>Total Savings = $5,000</strong></p>
-      <p>Our fee is 20% of $5,000, which is $1,000. You keep <strong>$4,000</strong> in your pocket!</p>
-
-      <div class="cash-highlight">That’s $4,000 in cold hard cash you dont have to spend at closing!</div>
-    </div>
-
-    <div class="fine-print">
-      Note: This scenario depicts a typical home loan situation for a $360,000 house, good credit, competitive initial offer, and completely following LoanTiger's advice. Your true savings with LoanTiger will likely be from $2,000-$10,000.
-    </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="footer-links">
-    <a href="privacy.html">Privacy Policy</a> | 
-    <a href="terms.html">Terms of Service</a>
-  </div>
-  <p>© 2024 MortgageNegotiator.ai</p>
+<footer>
+  <p>&copy; 2024 PictPerfect. All rights reserved.</p>
 </footer>
 </body>
 </html>
