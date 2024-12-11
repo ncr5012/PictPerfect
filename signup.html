@@ -28,7 +28,7 @@
 
 <section class="form-section">
   <h1>Create Your Account</h1>
-  <form action="pricing.html" method="get" class="signup-form">
+  <form id="signup-form" class="signup-form">
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
 
@@ -51,7 +51,6 @@
 <script>
   document.getElementById('signup-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    var form = this;
     var email = document.getElementById('email').value;
     var termsChecked = document.getElementById('privacy').checked;
 
@@ -59,7 +58,10 @@
     postData.append('email', email);
     postData.append('signup_terms', termsChecked);
 
-    fetch('https://script.google.com/macros/s/AKfycbxme-k5xDz6TpasOC840SFLOhfuJg0tEildxqmnAmgLgCiIR86khIbdIwnGgxWS8r3u/exec', {
+    // Replace this URL with your deployed Google Apps Script Web App URL
+    var scriptURL = 'https://script.google.com/macros/s/AKfycbxme-k5xDz6TpasOC840SFLOhfuJg0tEildxqmnAmgLgCiIR86khIbdIwnGgxWS8r3u/exec';
+
+    fetch(scriptURL, {
       method: 'POST',
       mode: 'no-cors',
       headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -75,6 +77,5 @@
     });
   });
 </script>
-
 </body>
 </html>

