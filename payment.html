@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Estimated Savings & Payment Info - Mortgage Negotiation AI</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-5FGPLWPLWY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-5FGPLWPLWY');
+</script>
+<body>
+
+  <header>
+    <div class="container">
+      <h1><img src="images/icon.png" alt="Company Logo" style="height:150px; vertical-align:middle;"> AI Negotiation Services</h1>
+    </div>
+  </header>
+
+<nav>
+  <div class="container">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>We Can Potentially Save You <span style="color:#e06d3f;">$2000</span></h2>
+  <p>Great news! Based on your current loan estimate, we believe we can negotiate a reduction in origination fees and/or additional lender credits worth approximately $2000. Our fee is 20% of any savings. If we can’t save you anything, you owe us nothing.</p>
+
+  <p>Please enter your credit card information to proceed. <strong>Your card will not be charged at this time.</strong> We only charge if you ultimately save money at closing.</p>
+
+  <form id="payment-form" action="start-calls.html" method="GET">
+    <!-- Include email again so we know which row to update -->
+    <div class="form-group">
+      <label for="cc-name">Name on Card</label>
+      <input type="text" id="cc-name" name="cc-name" placeholder="John Doe" required>
+    </div>
+    <div class="form-group">
+      <label for="cc-number">Card Number</label>
+      <input type="text" id="cc-number" name="cc-number" placeholder="•••• •••• •••• ••••" required>
+    </div>
+    <div class="form-group">
+      <label for="cc-exp">Expiration (MM/YY)</label>
+      <input type="text" id="cc-exp" name="cc-exp" placeholder="MM/YY" required>
+    </div>
+    <div class="form-group">
+      <label for="cc-cvv">CVV</label>
+      <input type="text" id="cc-cvv" name="cc-cvv" placeholder="123" required>
+    </div>
+    <div class="form-group">
+      <label for="cc-zip">Postal Code</label>
+      <input type="text" id="cc-zip" name="cc-zip" placeholder="12345" required>
+    </div>
+
+    <div class="form-group">
+      <input type="checkbox" id="terms-check" name="terms-check" required>
+      <label for="terms-check">I understand that if I elect to use LoanTiger services in the future, I will be charged according to the <a href="terms.html" target="_blank">Terms of Service</a> and the rates outlined on the <a href="pricing.html" target="_blank">Pricing</a> page.</label>
+    </div>
+
+    <button type="submit" class="btn">Continue</button>
+  </form>
+</div>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a> | 
+    <a href="terms.html">Terms of Service</a>
+  </div>
+  <p>© 2024 LoanTiger</p>
+</footer>
+
+<script>
+  document.getElementById('payment-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var form = this;
+    var cc_name = document.getElementById('cc-name').value;
+    var cc_number = document.getElementById('cc-number').value;
+    var cc_exp = document.getElementById('cc-exp').value;
+    var cc_cvv = document.getElementById('cc-cvv').value;
+    var cc_zip = document.getElementById('cc-zip').value;
+    var payment_terms = document.getElementById('terms-check').checked;
+
+    var postData = new URLSearchParams();
+    postData.append('cc_name', cc_name);
+    postData.append('cc_number', cc_number);
+    postData.append('cc_exp', cc_exp);
+    postData.append('cc_cvv', cc_cvv);
+    postData.append('cc_zip', cc_zip);
+    postData.append('payment_terms', payment_terms);
+
+    fetch('https://script.google.com/macros/s/AKfycbxXLlJ4Ym13e4QLZfiXCV_G_dXTkuBoZlbFFhTrVBng7KN4jXhNfJEQ87QCnNbOK2YL/exec', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: postData.toString()
+    })
+    .then(function(response) {
+      // Optionally parse JSON if your script returns JSON
+      return response.json();
+    })
+    .then(function(data) {
+      if (data.result === 'success') {
+        form.submit();
+      } else {
+        console.error('Non-success response from server:', data);
+        form.submit();
+      }
+    })
+    .catch(function(error) {
+      console.error('Error saving payment data to Google Sheets:', error);
+      form.submit();
+    });
+  });
+</script>
+
+</body>
+</html>
