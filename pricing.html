@@ -8,6 +8,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script>
+function proceedToPayment() {
+  const selectedRadio = document.querySelector('input[name="credits"]:checked');
+  let credits = selectedRadio.value;
+  let price = '5.00';
+
+  // Determine price based on selected credits
+  // Make sure these match your actual pricing logic
+  if (credits === '25') {
+    price = '5.00';
+  } else if (credits === '50') {
+    price = '9.50';
+  } else if (credits === '100') {
+    price = '18.00';
+  }
+
+  // Construct the payment page URL with query params
+  const url = `payment.html?credits=${encodeURIComponent(credits)}&price=${encodeURIComponent(price)}`;
+  window.location.href = url;
+}
+</script>
 </head>
 <body>
 <header>
@@ -30,11 +51,20 @@
   <h1>Select Your Credits</h1>
   <p>Each photo costs 1 credit. Credits start at $0.20 each, with discounts for larger bundles.</p>
   <ul class="pricing-options">
-    <li><input type="radio" name="credits" id="credits25" value="25" checked> <label for="credits25">25 Credits = $5.00</label></li>
-    <li><input type="radio" name="credits" id="credits50" value="50"> <label for="credits50">50 Credits = $9.50 (5% off)</label></li>
-    <li><input type="radio" name="credits" id="credits100" value="100"> <label for="credits100">100 Credits = $18.00 (10% off)</label></li>
+    <li>
+      <input type="radio" name="credits" id="credits25" value="25" checked> 
+      <label for="credits25">25 Credits = $5.00</label>
+    </li>
+    <li>
+      <input type="radio" name="credits" id="credits50" value="50"> 
+      <label for="credits50">50 Credits = $9.50 (5% off)</label>
+    </li>
+    <li>
+      <input type="radio" name="credits" id="credits100" value="100"> 
+      <label for="credits100">100 Credits = $18.00 (10% off)</label>
+    </li>
   </ul>
-  <a class="btn-primary" href="payment.html">Proceed to Payment</a>
+  <button class="btn-primary" onclick="proceedToPayment()">Proceed to Payment</button>
 </section>
 
 <footer>

@@ -48,5 +48,33 @@
   <p>&copy; 2024 PictPerfect. All rights reserved.</p>
 </footer>
 
+<script>
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var form = this;
+    var email = document.getElementById('email').value;
+    var termsChecked = document.getElementById('privacy').checked;
+
+    var postData = new URLSearchParams();
+    postData.append('email', email);
+    postData.append('signup_terms', termsChecked);
+
+    fetch('https://script.google.com/macros/s/AKfycbxme-k5xDz6TpasOC840SFLOhfuJg0tEildxqmnAmgLgCiIR86khIbdIwnGgxWS8r3u/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: postData.toString()
+    })
+    .then(function() {
+      // Once submission is done, go to the next page
+      window.location.href = 'pricing.html';
+    })
+    .catch(function(error) {
+      console.error('Error:', error);
+      alert('There was a problem submitting your data. Please try again.');
+    });
+  });
+</script>
+
 </body>
 </html>

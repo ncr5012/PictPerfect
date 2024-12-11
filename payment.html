@@ -10,11 +10,14 @@
 <link rel="stylesheet" href="css/styles.css">
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // Simple logic to display selected package on Payment page if needed
+  // Parse URL parameters to get the selected credits and price
   const urlParams = new URLSearchParams(window.location.search);
-  let packageSelected = "25 Credits = $5.00";
-  // This is a placeholder. In a real scenario you'd fetch selected credits from a server or session.
-  document.getElementById("selected-package").innerText = packageSelected;
+  const credits = urlParams.get('credits') || '25'; 
+  const price = urlParams.get('price') || '5.00';
+
+  // Display the selected package
+  const packageText = `${credits} Credits = $${price}`;
+  document.getElementById("selected-package").innerText = packageText;
 });
 </script>
 </head>
@@ -39,6 +42,9 @@ document.addEventListener("DOMContentLoaded", () => {
   <h1>Enter Payment Details</h1>
   <p>Selected Package: <span id="selected-package"></span></p>
   <form action="payment-unsuccessful.html" method="get" class="payment-form">
+    <label for="zip-code">ZIP Code:</label>
+    <input type="text" id="zip-code" name="zip-code" required placeholder="Enter your ZIP code">
+
     <label for="cc-number">Credit Card Number:</label>
     <input type="text" id="cc-number" name="cc-number" required placeholder="XXXX XXXX XXXX XXXX">
 
