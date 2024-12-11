@@ -4,12 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Payment - PictPerfect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Simple logic to display selected package on Payment page if needed
+  const urlParams = new URLSearchParams(window.location.search);
+  let packageSelected = "25 Credits = $5.00";
+  // This is a placeholder. In a real scenario you'd fetch selected credits from a server or session.
+  document.getElementById("selected-package").innerText = packageSelected;
+});
+</script>
 </head>
 <body>
 <header>
  <nav class="navbar">
-    <div class="logo">PictPerfect</div>
+    <div class="logo-container">
+      <img src="images/logo-placeholder.png" alt="PictPerfect Logo" class="logo-img">
+      <div class="logo-text">PictPerfect</div>
+    </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="product.html">Product</a></li>
@@ -22,16 +37,16 @@
 
 <section class="form-section">
   <h1>Enter Payment Details</h1>
-  <p>Selected Package: <span id="selected-package">25 Credits = $5.00</span></p>
+  <p>Selected Package: <span id="selected-package"></span></p>
   <form action="payment-unsuccessful.html" method="get" class="payment-form">
     <label for="cc-number">Credit Card Number:</label>
-    <input type="text" id="cc-number" name="cc-number" required>
+    <input type="text" id="cc-number" name="cc-number" required placeholder="XXXX XXXX XXXX XXXX">
 
     <label for="cc-exp">Expiry Date (MM/YY):</label>
-    <input type="text" id="cc-exp" name="cc-exp" required>
+    <input type="text" id="cc-exp" name="cc-exp" required placeholder="MM/YY">
 
     <label for="cc-cvc">CVC:</label>
-    <input type="text" id="cc-cvc" name="cc-cvc" required>
+    <input type="text" id="cc-cvc" name="cc-cvc" required placeholder="XXX">
 
     <button type="submit" class="btn-primary">Submit Payment</button>
   </form>

@@ -4,29 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pricing - PictPerfect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 <header>
   <nav class="navbar">
-    <div class="logo">PictPerfect</div>
+    <div class="logo-container">
+      <img src="images/logo-placeholder.png" alt="PictPerfect Logo" class="logo-img">
+      <div class="logo-text">PictPerfect</div>
+    </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="product.html">Product</a></li>
       <li><a href="blog.html">Blog</a></li>
-      <li><a href="how-pricing-works.html">Pricing</a></li>
+      <li><a href="how-pricing-works.html" class="active">Pricing</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
   </nav>
 </header>
 
 <section class="pricing-section">
-  <h1>Select Your Credit Package</h1>
-  <p>Each photo requires 1 credit. Credits cost $0.20 each. Bundles include discounts:</p>
-  <ul>
-    <li><input type="radio" name="credits" id="credits25" value="25" checked> 25 Credits = $5.00 (No discount)</li>
-    <li><input type="radio" name="credits" id="credits50" value="50"> 50 Credits = $9.50 (5% discount)</li>
-    <li><input type="radio" name="credits" id="credits100" value="100"> 100 Credits = $18.00 (10% discount)</li>
+  <h1>Select Your Credits</h1>
+  <p>Each photo costs 1 credit. Credits start at $0.20 each, with discounts for larger bundles.</p>
+  <ul class="pricing-options">
+    <li><input type="radio" name="credits" id="credits25" value="25" checked> <label for="credits25">25 Credits = $5.00</label></li>
+    <li><input type="radio" name="credits" id="credits50" value="50"> <label for="credits50">50 Credits = $9.50 (5% off)</label></li>
+    <li><input type="radio" name="credits" id="credits100" value="100"> <label for="credits100">100 Credits = $18.00 (10% off)</label></li>
   </ul>
   <a class="btn-primary" href="payment.html">Proceed to Payment</a>
 </section>
